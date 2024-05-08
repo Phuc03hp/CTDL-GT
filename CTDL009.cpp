@@ -1,18 +1,23 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
 using namespace std;
-int main()
-{
-	int a; cin>>a;
-	while(a--){
-		string s; cin>>s;
-		string res="";
-		res+=s[0];
-		for(int i=1;i<s.length();i++){
-			int n=res.length()-1;
-			if((s[i]-'0')^(res[n]-'0')) res+="1";
-			else res+="0";
-		}
-		cout<<res<<endl;
-	}
-}
 
+string binaryToGray(string binary) {
+    string gray = "";
+    gray += binary[0];
+    for (int i = 1; i < binary.length(); i++) {
+        gray += ((binary[i - 1] == binary[i]) ? '0' : '1');
+    }
+    return gray;
+}
+int main() {
+    int T;
+    cin >> T;
+    while (T--) {
+        string binary;
+        cin >> binary;
+        cout << binaryToGray(binary) << endl;
+    }
+
+    return 0;
+}

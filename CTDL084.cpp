@@ -1,34 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
-int n,k,ok=1;
+int n,k;
 string curString;
-void genString(int pos)
-{
-	int res= stoi(curString);
-    if (pos > n)
-    {
-        if(res%k==0) {
-			cout<<res<<endl;
-			ok=0;
-		}
-        return;
-    }
-    for (char i = '0'; i <= '1'; i ++)
-    {
-    	char c='1';
-    	if(i=='0') c='0';
-    	if(i=='1') c='9';
-        curString.push_back(c);    //thêm ký t? m?i vào dãy
-        genString(pos + 1);
-        curString.pop_back();      //b? ký t? này di
-    }
+vector<long long> v;
+void Try(int i){
+	if (i>99999999) return ;
+	v.push_back(i);
+	Try(10*i);
+	Try(10*i+9);
 }
 int main()
 {
-	n=1;
-    while(ok){
-    	genString(1);
-    	n++;
+	int s; cin>>s;
+	while(s--){
+		cin>>n;
+		Try(9);
+		int ok=1;
+		sort(v.begin(),v.end());
+		for(int i=0;i<v.size() && ok;i++){
+			if(ok){
+				if(v[i]%n==0) {
+					cout<<v[i]<<endl;
+					ok=0;
+				}
+			}			
+		}
+		v.clear();
 	}
-    return 0;
 }
